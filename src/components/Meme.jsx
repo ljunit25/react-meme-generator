@@ -22,7 +22,7 @@ function Meme() {
     const randomNumber = Math.ceil(Math.random() * allMemeImages.length)
     setMeme(oldValue => ({
       ...oldValue,
-      url: allMemeImages[randomNumber].url
+      url: allMemeImages[randomNumber].url === undefined ? "https://i.imgflip.com/30b1gx.jpg" : allMemeImages[randomNumber].url
     }));
   }
 
