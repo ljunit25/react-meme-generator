@@ -20,7 +20,7 @@ function Meme() {
   }
 
   function handleChange(event) {
-    const { name, value, type, checked } = event.target
+    const { name, value } = event.target
     setMeme(prevMeme => ({
       ...prevMeme,
       [name]: value
