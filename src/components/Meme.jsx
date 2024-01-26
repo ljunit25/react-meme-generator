@@ -6,17 +6,24 @@ function Meme() {
     topText: "",
     bottomText: "",
     url: "https://i.imgflip.com/30b1gx.jpg"
-  })
-  const [allMemeImages, setAllMemeImage] = React.useState(memeData)
+  });
+  const [allMemeImages, setAllMemeImage] = React.useState([])
+
+  React.useEffect(()=> {
+    async function getMemes() {
+      const res = await fetch("https://api.imgflip.com/get_memes");
+      const data = await res.json();
+      setAllMemeImage(data.data.memes);
+    }
+    getMemes();
+  }, []);
 
   function handleClick(){
-    const randomNumber = Math.ceil(Math.random() * allMemeImages.data.memes.length)
+    const randomNumber = Math.ceil(Math.random() * allMemeImages.length)
     setMeme(oldValue => ({
       ...oldValue,
-      url: allMemeImages.data.memes[randomNumber].url
-    }))
-
-    console.log(meme);
+      url: allMemeImages[randomNumber].url
+    }));
   }
 
   function handleChange(event) {
@@ -24,7 +31,7 @@ function Meme() {
     setMeme(prevMeme => ({
       ...prevMeme,
       [name]: value
-    }))
+    }));
   }
 
   return (
